@@ -1,28 +1,28 @@
 {
   "apps": [
     {
-      "id": "frogger",
       "name": "Frogger",
-      "version": "1.0",
+      "version": 1,
+      "url": "https://raw.githubusercontent.com/watsonlr/namebadge-apps/main/apps/frogger.bin",
       "size": 276400,
-      "icon": "https://watsonlr.github.io/namebadge-apps/icons/frogger.png",
-      "bin": "https://watsonlr.github.io/namebadge-apps/apps/frogger.bin"
+      "sha256": "d4d2b4f91eb6d9c549386450960a15ab48e499d51a73e40d272a8504d668287c",
+      "icon": "https://raw.githubusercontent.com/watsonlr/namebadge-apps/main/icons/frogger_icon.bin"
     },
     {
-      "id": "pacman",
       "name": "Pacman",
-      "version": "1.0",
+      "version": 1,
+      "url": "https://raw.githubusercontent.com/watsonlr/namebadge-apps/main/apps/pacman.bin",
       "size": 279456,
-      "icon": "https://watsonlr.github.io/namebadge-apps/icons/pacman.png",
-      "bin": "https://watsonlr.github.io/namebadge-apps/apps/pacman.bin"
+      "sha256": "d98afecf39e4f1382d734f198fcd435cd763036827faff4019420ebdd76e676e",
+      "icon": "https://raw.githubusercontent.com/watsonlr/namebadge-apps/main/icons/pacman_icon.bin"
     },
     {
-      "id": "tetris",
       "name": "Tetris",
-      "version": "1.0",
+      "version": 1,
+      "url": "https://raw.githubusercontent.com/watsonlr/namebadge-apps/main/apps/tetris.bin",
       "size": 276304,
-      "icon": "https://watsonlr.github.io/namebadge-apps/icons/tetris.png",
-      "bin": "https://watsonlr.github.io/namebadge-apps/apps/tetris.bin"
+      "sha256": "fa28670f70696108d9393489bc40492d54bbfab709195e611f2dbea175cb16e6",
+      "icon": "https://raw.githubusercontent.com/watsonlr/namebadge-apps/main/icons/tetris_icon.bin"
     }
   ]
 }
