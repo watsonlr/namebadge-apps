@@ -1,0 +1,19 @@
+{
+  "apps": [
+    {
+      "name": "Pacman",
+      "file": "apps/pacman.bin",
+      "version": "1.0"
+    },
+    {
+      "name": "Frogger",
+      "file": "apps/frogger_game.bin",
+      "version": "1.0"
+    },
+    {
+      "name": "Tetris",
+      "file": "apps/tetris.bin",
+      "version": "1.0"
+    }
+  ]
+}
