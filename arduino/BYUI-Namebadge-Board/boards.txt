@@ -1,0 +1,66 @@
+##############################################################
+# BYUI eBadge V4 — Arduino Board Definition
+# Requires the ESP32 Arduino core (arduino-esp32) to be installed.
+##############################################################
+
+byui_namebadge.name=BYUI eBadge V4
+
+# CP2102N USB-UART bridge VID/PID for automatic port detection
+byui_namebadge.vid.0=0x10C4
+byui_namebadge.pid.0=0xEA60
+
+# ── Upload ──────────────────────────────────────────────────────────────────
+byui_namebadge.upload.tool=esptool_py
+byui_namebadge.upload.tool.default=esptool_py
+byui_namebadge.upload.maximum_size=1310720
+byui_namebadge.upload.maximum_data_size=327680
+byui_namebadge.upload.speed=921600
+byui_namebadge.upload.before_reset=default_reset
+byui_namebadge.upload.after_reset=hard_reset
+byui_namebadge.upload.use_1200bps_touch=false
+byui_namebadge.upload.wait_for_upload_port=false
+byui_namebadge.upload.flags=
+byui_namebadge.upload.extra_flags=
+byui_namebadge.upload.erase_cmd=
+
+# ── Serial monitor ───────────────────────────────────────────────────────────
+byui_namebadge.serial.disableDTR=false
+byui_namebadge.serial.disableRTS=false
+
+# ── Build — MCU / core ───────────────────────────────────────────────────────
+byui_namebadge.build.tarch=xtensa
+byui_namebadge.build.target=esp32s3
+byui_namebadge.build.mcu=esp32s3
+byui_namebadge.build.core=esp32
+byui_namebadge.build.variant=esp32s3
+byui_namebadge.build.board=BYUI_NAMEBADGE_V4
+
+# ── Build — Flash ────────────────────────────────────────────────────────────
+byui_namebadge.build.bootloader_addr=0x0
+byui_namebadge.build.flash_size=4MB
+byui_namebadge.build.flash_freq=80m
+byui_namebadge.build.flash_mode=dio
+byui_namebadge.build.boot=dio
+byui_namebadge.build.boot_freq=80m
+
+# ── Build — Partition table ──────────────────────────────────────────────────
+# byui_badge.csv lives in tools/partitions/ within this board package.
+byui_namebadge.build.partitions=byui_badge
+
+# ── Build — PSRAM (2 MB octal, OPI mode) ────────────────────────────────────
+byui_namebadge.build.psram_type=opi
+byui_namebadge.build.memory_type={build.boot}_{build.psram_type}
+byui_namebadge.build.defines=-DBOARD_HAS_PSRAM
+
+# ── Build — USB (CP2102N UART bridge on J1, not native USB) ─────────────────
+byui_namebadge.build.usb_mode=1
+byui_namebadge.build.cdc_on_boot=0
+byui_namebadge.build.msc_on_boot=0
+byui_namebadge.build.dfu_on_boot=0
+
+# ── Build — CPU / FreeRTOS ───────────────────────────────────────────────────
+byui_namebadge.build.f_cpu=240000000L
+byui_namebadge.build.loop_core=1
+byui_namebadge.build.event_core=1
+
+byui_namebadge.build.extra_flags=
