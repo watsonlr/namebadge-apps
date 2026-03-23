@@ -51,30 +51,54 @@ board package to know how to compile for it.
 The BYUI board package tells Arduino exactly how to upload safely to
 your badge without overwriting the built-in recovery menu.
 
-1. Download or clone `namebadge-apps` from GitHub:
+1. Download **BYUI-Namebadge-Board.zip** from GitHub:
    ```
-   https://github.com/watsonlr/namebadge-apps
+   https://github.com/watsonlr/namebadge-apps/raw/main/arduino/BYUI-Namebadge-Board.zip
    ```
-2. Find your Arduino **hardware** folder:
-   - **Windows:** `C:\Users\<YourName>\Documents\Arduino\hardware\`
-   - **Mac:**     `~/Documents/Arduino/hardware/`
-   - **Linux:**   `~/Arduino/hardware/`
-3. Inside the `hardware` folder, create a new folder called `BYUI`
-   (if it does not already exist).
-4. Copy the entire `arduino/BYUI-Namebadge-Board` folder into `BYUI`:
+
+2. Create the `BYUI` folder inside your Arduino hardware folder:
+
+   **Linux / Mac** — open a terminal and run:
    ```
-   hardware/
+   mkdir -p ~/Arduino/hardware/BYUI
+   ```
+   **Windows** — open Command Prompt and run:
+   ```
+   mkdir "%USERPROFILE%\Documents\Arduino\hardware\BYUI"
+   ```
+
+3. Extract the zip into the `BYUI` folder you just created.
+   When done it should look like this:
+
+   **Linux / Mac:**
+   ```
+   ~/Arduino/hardware/
    └── BYUI/
-       └── BYUI-Namebadge-Board/   ← paste it here
-               boards.txt
-               platform.txt
-               bootloader/ ...
-               ...
+       └── BYUI-Namebadge-Board/
+           ├── boards.txt
+           ├── platform.txt
+           ├── bootloader/
+           ├── ota_data/
+           └── tools/
    ```
-5. **Restart Arduino IDE completely** (close and reopen).
-6. Go to **Tools > Board** — you should now see
+   **Windows:**
+   ```
+   %USERPROFILE%\Documents\Arduino\hardware\
+   └── BYUI\
+       └── BYUI-Namebadge-Board\
+           ├── boards.txt
+           ├── platform.txt
+           ├── bootloader\
+           ├── ota_data\
+           └── tools\
+   ```
+
+4. **Restart Arduino IDE completely** (close and reopen).
+
+5. Go to **Tools > Board** — you should now see
    **BYUI eBadge Boards** in the list.
-7. Select **BYUI eBadge V4**.
+
+6. Select **BYUI eBadge V4**.
 
 ---
 
