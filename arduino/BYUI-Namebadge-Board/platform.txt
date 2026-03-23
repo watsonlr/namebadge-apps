@@ -25,5 +25,6 @@ tools.esptool_py.upload.pattern="{tools.esptool_py.path}/{tools.esptool_py.cmd}"
 # Copy BYUI custom partition CSV to build path before esp32 core processes it.
 # The esp32 core's own prebuild hooks handle gen_esp32part.py automatically
 # once partitions.csv is in the build path.
-recipe.hooks.prebuild.1.pattern=python3 -c "import shutil; shutil.copy('{runtime.platform.path}/tools/partitions/byui_badge.csv', '{build.path}/partitions.csv')"
-recipe.hooks.prebuild.1.pattern.windows=python -c "import shutil; shutil.copy('{runtime.platform.path}/tools/partitions/byui_badge.csv', '{build.path}/partitions.csv')"
+# copy_partitions.py avoids shell quoting issues and works on all platforms.
+recipe.hooks.prebuild.1.pattern=python3 "{runtime.platform.path}/tools/copy_partitions.py" "{runtime.platform.path}/tools/partitions/byui_badge.csv" "{build.path}/partitions.csv"
+recipe.hooks.prebuild.1.pattern.windows=python "{runtime.platform.path}/tools/copy_partitions.py" "{runtime.platform.path}/tools/partitions/byui_badge.csv" "{build.path}/partitions.csv"
