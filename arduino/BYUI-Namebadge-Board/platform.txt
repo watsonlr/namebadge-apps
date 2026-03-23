@@ -1,5 +1,5 @@
 name=BYUI eBadge Boards
-version=1.0.5
+version=1.0.6
 
 # ── byui_flash tool ───────────────────────────────────────────────────────────
 # We declare our OWN tool (byui_flash) instead of reusing esptool_py.
