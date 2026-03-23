@@ -24,5 +24,5 @@ tools.esptool_py.upload.pattern="{tools.esptool_py.path}/{tools.esptool_py.cmd}"
 # ── Partition table generation ───────────────────────────────────────────────
 # Point gen_esp32part at our byui_badge.csv inside this board package.
 # {runtime.tools.esp32.path} resolves to the arduino-esp32 tools directory.
-recipe.hooks.prebuild.2.pattern=python3 "{runtime.platform.path}/../esp32/3.3.7/tools/gen_esp32part.py" -q "{runtime.platform.path}/tools/partitions/{build.partitions}.csv" "{build.path}/{build.project_name}.partitions.bin"
-recipe.hooks.prebuild.2.pattern.windows=python "{runtime.platform.path}/../esp32/3.3.7/tools/gen_esp32part.py" -q "{runtime.platform.path}\tools\partitions\{build.partitions}.csv" "{build.path}\{build.project_name}.partitions.bin"
+recipe.hooks.prebuild.2.pattern=python3 "{runtime.platform.path}/tools/gen_esp32part.py" -q "{runtime.platform.path}/tools/partitions/{build.partitions}.csv" "{build.path}/{build.project_name}.partitions.bin"
+recipe.hooks.prebuild.2.pattern.windows=python "{runtime.platform.path}/tools/gen_esp32part.py" -q "{runtime.platform.path}\tools\partitions\{build.partitions}.csv" "{build.path}\{build.project_name}.partitions.bin"
