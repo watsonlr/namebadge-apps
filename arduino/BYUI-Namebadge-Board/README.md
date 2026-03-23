@@ -24,65 +24,32 @@ Install the **ESP32 Arduino core** first (one-time):
 
 ## Install BYUI-Namebadge-Board
 
-### Option A — Install from zip (recommended)
+### Via Boards Manager (recommended)
 
-1. Download `BYUI-Namebadge-Board.zip` from this repo's `arduino/` folder.
+1. Open Arduino IDE → **File > Preferences**
+   (Mac: **Arduino IDE > Settings**).
 
-2. Find your Arduino **hardware** folder and create a `BYUI` subfolder:
-
-   **Linux / Mac:**
+2. Add this URL to **"Additional boards manager URLs"**:
    ```
-   mkdir -p ~/Arduino/hardware/BYUI
-   ```
-   **Windows:**
-   ```
-   mkdir "%USERPROFILE%\Documents\Arduino\hardware\BYUI"
+   https://raw.githubusercontent.com/watsonlr/namebadge-apps/main/arduino/BYUI-Namebadge-Board/package_byui_index.json
    ```
 
-3. Extract the zip so the final structure looks like this:
+3. Open **Tools > Board > Boards Manager**, search `BYUI`, and
+   click **Install** next to **BYUI eBadge Boards**.
 
-   **Linux / Mac:**
-   ```
-   ~/Arduino/hardware/
-   └── BYUI/
-       └── BYUI-Namebadge-Board/
-           ├── boards.txt
-           ├── platform.txt
-           ├── bootloader/
-           ├── ota_data/
-           └── tools/
-   ```
-   **Windows:**
-   ```
-   %USERPROFILE%\Documents\Arduino\hardware\
-   └── BYUI\
-       └── BYUI-Namebadge-Board\
-           ├── boards.txt
-           ├── platform.txt
-           ├── bootloader\
-           ├── ota_data\
-           └── tools\
-   ```
+4. Select **Tools > Board > BYUI eBadge Boards > BYUI eBadge V4**.
 
-4. Restart Arduino IDE.
-
-5. Open **Tools > Board** — you should see **BYUI eBadge Boards** with
-   **BYUI eBadge V4** listed underneath. Select it.
-
-### Option B — Clone / copy manually
+### Manual install (advanced)
 
 Clone `namebadge-apps` and copy the folder directly:
 
 ```bash
 # Linux / Mac
+mkdir -p ~/Arduino/hardware/BYUI
 cp -r namebadge-apps/arduino/BYUI-Namebadge-Board ~/Arduino/hardware/BYUI/
-
-# Verify
-ls ~/Arduino/hardware/BYUI/BYUI-Namebadge-Board/
-# boards.txt  bootloader/  GETTING_STARTED.md  ota_data/  platform.txt  README.md  tools/
 ```
 
-Then restart Arduino IDE.
+Restart Arduino IDE, then select **Tools > Board > BYUI eBadge Boards > BYUI eBadge V4**.
 
 ---
 
@@ -144,22 +111,36 @@ BYUI-Namebadge-Board/
 
 ---
 
-## Updating the package (maintainers)
+## Releasing a new version (maintainers)
 
-When a new factory loader is built and released:
+1. Bump `version=` in `platform.txt` (e.g. `1.0.1`).
 
-```bash
-# From the BYUI-Namebadge-Board directory:
-./tools/scripts/update_bootloader.sh          # copies new factory_switch.bin
-python3 ./tools/scripts/generate_ota_data.py  # regenerates ota_data_initial.bin
-```
+2. Update binaries if needed:
+   ```bash
+   # From the BYUI-Namebadge-Board directory:
+   ./tools/scripts/update_bootloader.sh          # copies new factory_switch.bin
+   python3 ./tools/scripts/generate_ota_data.py  # regenerates ota_data_initial.bin
+   ```
 
-Then rebuild the zip and commit everything to `namebadge-apps`:
+3. Build the versioned zip (from `namebadge-apps/arduino/`):
+   ```bash
+   cd namebadge-apps/arduino
+   zip -r BYUI-Namebadge-Board-1.0.1.zip BYUI-Namebadge-Board \
+       --exclude "*.git*" --exclude "*/.DS_Store" --exclude "*/package_byui_index.json"
+   sha256sum BYUI-Namebadge-Board-1.0.1.zip
+   wc -c < BYUI-Namebadge-Board-1.0.1.zip
+   ```
 
-```bash
-# From namebadge-apps/arduino/
-zip -r BYUI-Namebadge-Board.zip BYUI-Namebadge-Board/
-git add BYUI-Namebadge-Board.zip BYUI-Namebadge-Board/
-git commit -m "Release BYUI-Namebadge-Board vX.X.X"
-git push
-```
+4. **Append** a new entry to the `platforms` array in `package_byui_index.json`
+   (do not replace the old entry — Boards Manager needs full history for upgrades).
+   Update `url`, `archiveFileName`, `checksum`, `size`, and `version`.
+
+5. Commit and push:
+   ```bash
+   git add BYUI-Namebadge-Board/ BYUI-Namebadge-Board-1.0.1.zip
+   git commit -m "Release BYUI-Namebadge-Board v1.0.1"
+   git push
+   ```
+
+6. Create a GitHub Release tagged `arduino-v1.0.1` and upload
+   `BYUI-Namebadge-Board-1.0.1.zip` as the release asset.

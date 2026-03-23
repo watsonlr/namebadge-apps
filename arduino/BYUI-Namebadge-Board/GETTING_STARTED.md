@@ -51,54 +51,25 @@ board package to know how to compile for it.
 The BYUI board package tells Arduino exactly how to upload safely to
 your badge without overwriting the built-in recovery menu.
 
-1. Download **BYUI-Namebadge-Board.zip** from GitHub:
-   ```
-   https://github.com/watsonlr/namebadge-apps/raw/main/arduino/BYUI-Namebadge-Board.zip
-   ```
+1. In Arduino IDE go to **File > Preferences**
+   (Mac: **Arduino IDE > Settings**).
 
-2. Create the `BYUI` folder inside your Arduino hardware folder:
+2. Find **"Additional boards manager URLs"** and paste in:
+   ```
+   https://raw.githubusercontent.com/watsonlr/namebadge-apps/main/arduino/BYUI-Namebadge-Board/package_byui_index.json
+   ```
+   Click **OK**.
 
-   **Linux / Mac** — open a terminal and run:
-   ```
-   mkdir -p ~/Arduino/hardware/BYUI
-   ```
-   **Windows** — open Command Prompt and run:
-   ```
-   mkdir "%USERPROFILE%\Documents\Arduino\hardware\BYUI"
-   ```
+3. Go to **Tools > Board > Boards Manager**.
 
-3. Extract the zip into the `BYUI` folder you just created.
-   When done it should look like this:
+4. In the search box type `BYUI`.
 
-   **Linux / Mac:**
-   ```
-   ~/Arduino/hardware/
-   └── BYUI/
-       └── BYUI-Namebadge-Board/
-           ├── boards.txt
-           ├── platform.txt
-           ├── bootloader/
-           ├── ota_data/
-           └── tools/
-   ```
-   **Windows:**
-   ```
-   %USERPROFILE%\Documents\Arduino\hardware\
-   └── BYUI\
-       └── BYUI-Namebadge-Board\
-           ├── boards.txt
-           ├── platform.txt
-           ├── bootloader\
-           ├── ota_data\
-           └── tools\
-   ```
+5. Find **"BYUI eBadge Boards"** and click **Install**.
 
-4. **Restart Arduino IDE completely** (close and reopen).
-
-5. Go to **Tools > Board** — you should now see
+6. Go to **Tools > Board** — you should now see
    **BYUI eBadge Boards** in the list.
 
-6. Select **BYUI eBadge V4**.
+7. Select **BYUI eBadge V4**.
 
 ---
 

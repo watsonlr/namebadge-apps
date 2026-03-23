@@ -1,0 +1,36 @@
+{
+  "packages": [
+    {
+      "name": "BYUI",
+      "maintainer": "BYU-Idaho",
+      "websiteURL": "https://github.com/watsonlr/namebadge-apps",
+      "email": "",
+      "help": {
+        "online": "https://github.com/watsonlr/namebadge-apps"
+      },
+      "platforms": [
+        {
+          "name": "BYUI eBadge Boards",
+          "architecture": "BYUI-Namebadge-Board",
+          "version": "1.0.0",
+          "category": "Contributed",
+          "url": "https://github.com/watsonlr/namebadge-apps/releases/download/arduino-v1.0.0/BYUI-Namebadge-Board-1.0.0.zip",
+          "archiveFileName": "BYUI-Namebadge-Board-1.0.0.zip",
+          "checksum": "SHA-256:6e317f9b5d2b0a28d647852f75d472b38b04644357cfdd5af1b100e908849d9a",
+          "size": "26535",
+          "boards": [
+            { "name": "BYUI eBadge V4" }
+          ],
+          "toolsDependencies": [
+            {
+              "packager": "esp32",
+              "name": "esptool_py",
+              "version": "4.8.1"
+            }
+          ]
+        }
+      ],
+      "tools": []
+    }
+  ]
+}
