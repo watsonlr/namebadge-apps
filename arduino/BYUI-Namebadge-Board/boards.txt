@@ -10,8 +10,8 @@ byui_namebadge.vid.0=0x10C4
 byui_namebadge.pid.0=0xEA60
 
 # ── Upload ──────────────────────────────────────────────────────────────────
-byui_namebadge.upload.tool=esptool_py
-byui_namebadge.upload.tool.default=esptool_py
+byui_namebadge.upload.tool=byui_flash
+byui_namebadge.upload.tool.default=byui_flash
 byui_namebadge.upload.maximum_size=1310720
 byui_namebadge.upload.maximum_data_size=327680
 byui_namebadge.upload.speed=921600

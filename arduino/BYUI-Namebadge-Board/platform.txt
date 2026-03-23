@@ -1,25 +1,30 @@
 name=BYUI eBadge Boards
-version=1.0.0
+version=1.0.1
 
-# ── esptool path ─────────────────────────────────────────────────────────────
-# Resolved from the installed arduino-esp32 package.
-tools.esptool_py.path={runtime.tools.esptool_py.path}
-tools.esptool_py.cmd=esptool
-tools.esptool_py.cmd.windows=esptool.exe
+# ── byui_flash tool ───────────────────────────────────────────────────────────
+# We declare our OWN tool (byui_flash) instead of reusing esptool_py.
+# Arduino resolves upload.pattern from the package that OWNS the tool.
+# The esp32 package owns esptool_py, so our override of that recipe is silently
+# ignored.  byui_flash is owned by this package, so our recipe always wins.
+# The binary still comes from the esptool_py package installed by arduino-esp32.
+tools.byui_flash.path={runtime.tools.esptool_py.path}
+tools.byui_flash.cmd=esptool
+tools.byui_flash.cmd.windows=esptool.exe
 
-tools.esptool_py.upload.params.verbose=-vv
-tools.esptool_py.upload.params.quiet=--silent
+tools.byui_flash.upload.params.verbose=-vv
+tools.byui_flash.upload.params.quiet=--silent
 
 # ── Upload recipe ─────────────────────────────────────────────────────────────
-# Overrides the arduino-esp32 default recipe to:
-#   0x000000  factory_switch.bin   — BYUI custom bootloader (preserves loader)
+# Writes four regions on every Upload:
+#   0x000000  factory_switch.bin   — BYUI custom 2nd-stage bootloader
 #   0x008000  partitions.bin       — BYUI badge partition layout
-#   0x00F000  ota_data_initial.bin — otadata pointing to ota_0
-#   0x160000  sketch.bin           — student sketch → ota_0 slot
+#   0x00F000  ota_data_initial.bin — otadata: boot ota_0 on next reset
+#   0x160000  sketch.bin           — student sketch in the ota_0 slot
 #
-# This ensures every Upload re-affirms the BYUI bootloader and partition table
-# so a student using the wrong board profile can never brick the factory loader.
-tools.esptool_py.upload.pattern="{tools.esptool_py.path}/{tools.esptool_py.cmd}" {upload.verbose} --chip {build.mcu} --port "{serial.port}" --baud {upload.speed} --before {upload.before_reset} --after {upload.after_reset} write_flash -z --flash_mode {build.flash_mode} --flash_freq {build.flash_freq} --flash_size {build.flash_size} 0x000000 "{runtime.platform.path}/bootloader/factory_switch.bin" 0x008000 "{build.path}/{build.project_name}.partitions.bin" 0x00F000 "{runtime.platform.path}/ota_data/ota_data_initial.bin" 0x160000 "{build.path}/{build.project_name}.bin"
+# Re-writing factory_switch.bin every upload means a student can never
+# accidentally brick the factory-escape (BOOT button) by using the wrong
+# board profile.
+tools.byui_flash.upload.pattern="{tools.byui_flash.path}/{tools.byui_flash.cmd}" {upload.verbose} --chip {build.mcu} --port "{serial.port}" --baud {upload.speed} --before {upload.before_reset} --after {upload.after_reset} write_flash -z --flash_mode {build.flash_mode} --flash_freq {build.flash_freq} --flash_size {build.flash_size} 0x000000 "{runtime.platform.path}/bootloader/factory_switch.bin" 0x008000 "{build.path}/{build.project_name}.partitions.bin" 0x00F000 "{runtime.platform.path}/ota_data/ota_data_initial.bin" 0x160000 "{build.path}/{build.project_name}.bin"
 
 # ── Partition table ───────────────────────────────────────────────────────────
 # Copy BYUI custom partition CSV to build path before esp32 core processes it.
