@@ -31,7 +31,7 @@ byui_namebadge.serial.disableRTS=false
 byui_namebadge.build.tarch=xtensa
 byui_namebadge.build.target=esp32s3
 byui_namebadge.build.mcu=esp32s3
-byui_namebadge.build.core=esp32
+byui_namebadge.build.core=esp32:esp32
 byui_namebadge.build.variant=esp32s3
 byui_namebadge.build.board=BYUI_NAMEBADGE_V4
 
