@@ -24,23 +24,65 @@ Install the **ESP32 Arduino core** first (one-time):
 
 ## Install BYUI-Namebadge-Board
 
-### Manual install (recommended for now)
+### Option A — Install from zip (recommended)
 
-1. Find your Arduino hardware folder:
-   - **Linux/Mac:** `~/Arduino/hardware/`
-   - **Windows:** `%USERPROFILE%\Documents\Arduino\hardware\`
+1. Download `BYUI-Namebadge-Board.zip` from this repo's `arduino/` folder.
 
-2. Create the folder `BYUI` inside it if it doesn't exist.
+2. Find your Arduino **hardware** folder and create a `BYUI` subfolder:
 
-3. Copy the entire `BYUI-Namebadge-Board` folder into it:
+   **Linux / Mac:**
    ```
-   ~/Arduino/hardware/BYUI/BYUI-Namebadge-Board/
+   mkdir -p ~/Arduino/hardware/BYUI
+   ```
+   **Windows:**
+   ```
+   mkdir "%USERPROFILE%\Documents\Arduino\hardware\BYUI"
+   ```
+
+3. Extract the zip so the final structure looks like this:
+
+   **Linux / Mac:**
+   ```
+   ~/Arduino/hardware/
+   └── BYUI/
+       └── BYUI-Namebadge-Board/
+           ├── boards.txt
+           ├── platform.txt
+           ├── bootloader/
+           ├── ota_data/
+           └── tools/
+   ```
+   **Windows:**
+   ```
+   %USERPROFILE%\Documents\Arduino\hardware\
+   └── BYUI\
+       └── BYUI-Namebadge-Board\
+           ├── boards.txt
+           ├── platform.txt
+           ├── bootloader\
+           ├── ota_data\
+           └── tools\
    ```
 
 4. Restart Arduino IDE.
 
 5. Open **Tools > Board** — you should see **BYUI eBadge Boards** with
    **BYUI eBadge V4** listed underneath. Select it.
+
+### Option B — Clone / copy manually
+
+Clone `namebadge-apps` and copy the folder directly:
+
+```bash
+# Linux / Mac
+cp -r namebadge-apps/arduino/BYUI-Namebadge-Board ~/Arduino/hardware/BYUI/
+
+# Verify
+ls ~/Arduino/hardware/BYUI/BYUI-Namebadge-Board/
+# boards.txt  bootloader/  GETTING_STARTED.md  ota_data/  platform.txt  README.md  tools/
+```
+
+Then restart Arduino IDE.
 
 ---
 
@@ -53,14 +95,17 @@ Install the **ESP32 Arduino core** first (one-time):
 
 The board package automatically flashes:
 
-| Address  | Binary                    | Purpose                          |
-|----------|---------------------------|----------------------------------|
-| `0x0000` | `factory_switch.bin`      | BYUI bootloader (always safe)    |
-| `0x8000` | partition table           | Badge flash layout               |
-| `0xF000` | `ota_data_initial.bin`    | Boot ota_0 on next reset         |
-| `0x160000` | your sketch             | Student app slot (ota_0)         |
+| Address    | Binary                 | Purpose                       |
+|------------|------------------------|-------------------------------|
+| `0x000000` | `factory_switch.bin`   | BYUI bootloader (always safe) |
+| `0x008000` | partition table        | Badge flash layout            |
+| `0x00F000` | `ota_data_initial.bin` | Boot ota_0 on next reset      |
+| `0x160000` | your sketch            | Student app slot (ota_0)      |
 
 The factory loader at `0x20000` is **never touched**.
+
+See [GETTING_STARTED.md](GETTING_STARTED.md) for a full step-by-step guide
+including a working Blink sketch.
 
 ---
 
@@ -71,7 +116,8 @@ At any time:
 1. Press **RESET** on the badge.
 2. Within ~500 ms, press the **BOOT** button.
 
-The factory loader menu appears.
+The factory loader menu appears. Press **RESET** again (without BOOT) to
+return to your sketch.
 
 ---
 
@@ -80,17 +126,20 @@ The factory loader menu appears.
 ```
 BYUI-Namebadge-Board/
 ├── boards.txt                    ← board hardware settings
-├── platform.txt                  ← upload recipe override
+├── platform.txt                  ← upload recipe + partition prebuild hook
+├── GETTING_STARTED.md            ← student step-by-step guide
+├── README.md                     ← this file
 ├── bootloader/
 │   └── factory_switch.bin        ← BYUI custom 2nd-stage bootloader
-├── tools/
-│   ├── partitions/
-│   │   └── byui_badge.csv        ← badge flash partition table
-│   └── scripts/
-│       ├── generate_ota_data.py  ← regenerates ota_data_initial.bin
-│       └── update_bootloader.sh  ← copies new factory_switch.bin from IDF build
-└── ota_data/
-    └── ota_data_initial.bin      ← pre-built otadata (boot ota_0)
+├── ota_data/
+│   └── ota_data_initial.bin      ← pre-built otadata (boots ota_0)
+└── tools/
+    ├── copy_partitions.py        ← prebuild helper (copies CSV to build path)
+    ├── partitions/
+    │   └── byui_badge.csv        ← badge flash partition table
+    └── scripts/
+        ├── generate_ota_data.py  ← regenerates ota_data_initial.bin
+        └── update_bootloader.sh  ← copies new factory_switch.bin from IDF build
 ```
 
 ---
@@ -105,4 +154,12 @@ When a new factory loader is built and released:
 python3 ./tools/scripts/generate_ota_data.py  # regenerates ota_data_initial.bin
 ```
 
-Then commit and push to `namebadge-apps`.
+Then rebuild the zip and commit everything to `namebadge-apps`:
+
+```bash
+# From namebadge-apps/arduino/
+zip -r BYUI-Namebadge-Board.zip BYUI-Namebadge-Board/
+git add BYUI-Namebadge-Board.zip BYUI-Namebadge-Board/
+git commit -m "Release BYUI-Namebadge-Board vX.X.X"
+git push
+```
