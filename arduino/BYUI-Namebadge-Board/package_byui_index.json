@@ -176,8 +176,8 @@
           "category": "Contributed",
           "url": "https://github.com/watsonlr/namebadge-apps/releases/download/arduino-v1.0.8/BYUI-Namebadge-Board-1.0.8.zip",
           "archiveFileName": "BYUI-Namebadge-Board-1.0.8.zip",
-          "checksum": "SHA-256:9703285c6a4f5f85fe2c688415054b72dda5db6e168489c984681fb966b00270",
-          "size": "39569",
+          "checksum": "SHA-256:62af63930cc869d239ccbe3fdb1cd276552eff73f7375bfb800902ba62a45ae8",
+          "size": "40227",
           "boards": [
             { "name": "BYUI eBadge V4" }
           ],
