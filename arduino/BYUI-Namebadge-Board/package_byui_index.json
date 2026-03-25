@@ -168,6 +168,26 @@
               "version": "5.1.0"
             }
           ]
+        },
+        {
+          "name": "BYUI eBadge Boards",
+          "architecture": "esp32",
+          "version": "1.0.8",
+          "category": "Contributed",
+          "url": "https://github.com/watsonlr/namebadge-apps/releases/download/arduino-v1.0.8/BYUI-Namebadge-Board-1.0.8.zip",
+          "archiveFileName": "BYUI-Namebadge-Board-1.0.8.zip",
+          "checksum": "SHA-256:9703285c6a4f5f85fe2c688415054b72dda5db6e168489c984681fb966b00270",
+          "size": "39569",
+          "boards": [
+            { "name": "BYUI eBadge V4" }
+          ],
+          "toolsDependencies": [
+            {
+              "packager": "esp32",
+              "name": "esptool_py",
+              "version": "5.1.0"
+            }
+          ]
         }
       ],
       "tools": []
