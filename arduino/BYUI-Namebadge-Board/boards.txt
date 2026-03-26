@@ -69,4 +69,3 @@ byui_namebadge.build.f_cpu=240000000L
 byui_namebadge.build.loop_core=1
 byui_namebadge.build.event_core=1
 
-byui_namebadge.build.extra_flags=
