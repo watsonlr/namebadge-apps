@@ -22,13 +22,11 @@ byui_namebadge.serial.disableRTS=false
 
 byui_namebadge.build.tarch=xtensa
 byui_namebadge.build.target=esp32s3
-byui_namebadge.build.mcu=esp32
+byui_namebadge.build.mcu=esp32s3
 byui_namebadge.build.core=esp32:esp32
-byui_namebadge.build.variant=esp32
-byui_namebadge.build.board=ESP32_DEV
+byui_namebadge.build.variant=esp32s3
+byui_namebadge.build.board=BYUI_NAMEBADGE_V4
 byui_namebadge.build.arch=ESP32
-
-byui_namebadge.build.extra_flags=-DARDUINO_ARCH_ESP32 -DESP32
 
 byui_namebadge.build.bootloader_addr=0x0
 byui_namebadge.build.flash_size=4MB
@@ -49,6 +47,6 @@ byui_namebadge.build.msc_on_boot=0
 byui_namebadge.build.dfu_on_boot=0
 
 byui_namebadge.build.f_cpu=240000000L
-byui_namebadge.build.loop_core=1
-byui_namebadge.build.event_core=1
+byui_namebadge.build.loop_core=
+byui_namebadge.build.event_core=
 
