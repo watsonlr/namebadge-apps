@@ -28,12 +28,18 @@ byui_namebadge.serial.disableDTR=false
 byui_namebadge.serial.disableRTS=false
 
 # ── Build — MCU / core ───────────────────────────────────────────────────────
+
+# Platform/MCU/Arch for FastLED and core detection
 byui_namebadge.build.tarch=xtensa
 byui_namebadge.build.target=esp32s3
-byui_namebadge.build.mcu=esp32s3
+byui_namebadge.build.mcu=esp32
 byui_namebadge.build.core=esp32:esp32
-byui_namebadge.build.variant=esp32:esp32s3
-byui_namebadge.build.board=BYUI_NAMEBADGE_V4
+byui_namebadge.build.variant=esp32
+byui_namebadge.build.board=ESP32_DEV
+byui_namebadge.build.arch=ESP32
+
+# CRITICAL: Ensure FastLED and other libraries detect ESP32
+byui_namebadge.build.extra_flags=-DARDUINO_ARCH_ESP32 -DESP32
 
 # ── Build — Flash ────────────────────────────────────────────────────────────
 byui_namebadge.build.bootloader_addr=0x0
