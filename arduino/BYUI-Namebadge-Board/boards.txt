@@ -32,7 +32,7 @@ byui_namebadge.build.bootloader_addr=0x0
 byui_namebadge.build.flash_size=4MB
 byui_namebadge.build.flash_freq=80m
 byui_namebadge.build.flash_mode=dio
-byui_namebadge.build.boot=dio
+byui_namebadge.build.boot=qio
 byui_namebadge.build.boot_freq=80m
 
 byui_namebadge.build.partitions=byui_badge
