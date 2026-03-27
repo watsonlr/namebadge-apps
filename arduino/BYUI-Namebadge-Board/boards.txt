@@ -4,8 +4,8 @@ byui_namebadge.name=BYUI eBadge V4
 byui_namebadge.vid.0=0x10C4
 byui_namebadge.pid.0=0xEA60
 
-byui_namebadge.upload.tool=byui_flash
-byui_namebadge.upload.tool.default=byui_flash
+byui_namebadge.upload.tool=esptool_py
+byui_namebadge.upload.tool.default=esptool_py
 byui_namebadge.upload.maximum_size=1310720
 byui_namebadge.upload.maximum_data_size=327680
 byui_namebadge.upload.speed=921600
@@ -42,7 +42,7 @@ byui_namebadge.build.memory_type={build.boot}_{build.psram_type}
 byui_namebadge.build.defines=-DBOARD_HAS_PSRAM
 
 byui_namebadge.build.usb_mode=1
-byui_namebadge.build.cdc_on_boot=0
+byui_namebadge.build.cdc_on_boot=1
 byui_namebadge.build.msc_on_boot=0
 byui_namebadge.build.dfu_on_boot=0
 
