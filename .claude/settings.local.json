@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find . -not -path */node_modules/* -not -path */.git/*)",
+      "Bash(powershell -Command \"Compress-Archive -Path ''BYUI-Namebadge-Board/*'' -DestinationPath ''BYUI-Namebadge-Board-1.0.8.zip'' -Force\")"
+    ]
+  }
+}
