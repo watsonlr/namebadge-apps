@@ -3,10 +3,10 @@
     {
       "name": "BYUI",
       "maintainer": "BYU-Idaho",
-      "websiteURL": "https://github.com/watsonlr/namebadge-apps",
+      "websiteURL": "https://github.com/BYU-I-eBadge/byu-i-ebadge.github.io",
       "email": "",
       "help": {
-        "online": "https://github.com/watsonlr/namebadge-apps"
+        "online": "https://raw.githubusercontent.com/BYU-I-eBadge/byu-i-ebadge.github.io/main/arduino_IDE_support/package_byui_index.json"
       },
       "platforms": [
         {
