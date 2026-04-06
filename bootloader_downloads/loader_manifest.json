@@ -1,15 +1,8 @@
 [
   {
     "hw_version": 4,
-    "loader_version": 0,
-    "binary_url": "https://watsonlr.github.io/namebadge-apps/bootloader_downloads/badge_bootloader_v4.0.bin",
-    "size": 1139376,
-    "sha256": "e7362c8341e467a03a140423aa1078ea8210debebc032a8885e3d3edfe10c46d"
-  },
-  {
-    "hw_version": 4,
     "loader_version": 1,
-    "binary_url": "https://watsonlr.github.io/namebadge-apps/bootloader_downloads/badge_bootloader_v4.1.bin",
+    "binary_url": "https://byu-i-ebadge.github.io/bootloader_downloads/badge_bootloader_v4.1.bin",
     "size": 1139520,
     "sha256": "73bc9ef874ba28980be14a6efb088fbed21ad91672e56914fbb04bf591f6ca47"
   }
